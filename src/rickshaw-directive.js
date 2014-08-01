@@ -33,13 +33,14 @@
       scope: {
         series: '=',
         options: '=',
+        graph: '=?',
         watch: '@'
       },
       link: function rickshawDirectiveLink(scope, element, attrs) {
 
         var watch = scope.watch === undefined || scope.watch === 'true' ? true : false;
         
-        var graph = new Rickshaw.Graph({
+        var graph = scope.graph = new Rickshaw.Graph({
             element: element[0],
             series: scope.series
         });
