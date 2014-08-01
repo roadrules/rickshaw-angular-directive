@@ -21,15 +21,9 @@
 
   function rickshawDirective($timeout) {
 
-    function options(scope) {
-      return {
-        renderer: scope.renderer
-      };
-    }
-
     function redraw(graph, scope) {
       $timeout(function() {
-        graph.configure(options(scope));
+        graph.configure(scope.options);
         graph.render();
       }, 0);
     }
@@ -38,7 +32,7 @@
       restrict: 'E',
       scope: {
         series: '=',
-        renderer: '=',
+        options: '=',
         watch: '@'
       },
       link: function rickshawDirectiveLink(scope, element, attrs) {
@@ -47,9 +41,9 @@
         
         var graph = new Rickshaw.Graph({
             element: element[0],
-            renderer: scope.renderer,
             series: scope.series
         });
+        graph.configure(scope.options);
         graph.render();
 
         scope.$on('rickshaw-directive.render', function() {
@@ -57,12 +51,12 @@
         });
 
         if (watch) {
-          var unregisters = [];
 
-          scope.$watch('renderer', function(n, o) {
+          scope.$watchCollection('options', function(n, o) {
             redraw(graph, scope);
           });
 
+          var unregisters = [];
           scope.$watchCollection('series', function(n, o) {
 
             // unregister all of the previous watchers
