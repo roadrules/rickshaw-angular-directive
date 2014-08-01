@@ -58,6 +58,11 @@
 
         if (watch) {
           var unregisters = [];
+
+          scope.$watch('renderer', function(n, o) {
+            redraw(graph, scope);
+          });
+
           scope.$watchCollection('series', function(n, o) {
 
             // unregister all of the previous watchers
