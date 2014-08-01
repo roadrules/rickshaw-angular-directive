@@ -16,7 +16,7 @@
 (function() {
   
   angular.module('rickshaw-directive', [])
-    .directive('rickshaw', rickshawDirective); 
+    .directive('rickshawGraph', rickshawDirective); 
 
 
   function rickshawDirective($timeout) {
