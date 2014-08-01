@@ -18,11 +18,27 @@
   angular.module('rickshaw-directive', [])
     .directive('rickshaw', rickshawDirective); 
 
-  function rickshawDirective() {
+
+  function rickshawDirective($timeout) {
+
+    function options(scope) {
+      return {
+        renderer: scope.renderer
+      };
+    }
+
+    function redraw(graph, scope) {
+      $timeout(function() {
+        graph.configure(options(scope));
+        graph.render();
+      }, 0);
+    }
+    
     return {
       restrict: 'E',
       scope: {
         series: '=',
+        renderer: '=',
         watch: '@'
       },
       link: function rickshawDirectiveLink(scope, element, attrs) {
@@ -31,14 +47,13 @@
         
         var graph = new Rickshaw.Graph({
             element: element[0],
-            renderer: 'area', 
+            renderer: scope.renderer,
             series: scope.series
         });
-        
         graph.render();
 
         scope.$on('rickshaw-directive.render', function() {
-          graph.render();
+          redraw(graph, scope);
         });
 
         if (watch) {
@@ -52,7 +67,7 @@
             //register each series data
             for(var i=0; i < n.length; i++) {
               var unregister = scope.$watchCollection('series['+i+'].data', function(newValue, oldValue) {
-                graph.render();
+                redraw(graph, scope);
               });
               unregisters.push(unregister);
             } 
