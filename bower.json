@@ -1,0 +1,23 @@
+{
+  "name": "rickshaw-directive",
+  "version": "0.0.1-pre",
+  "homepage": "https://github.com/roadrules/rickshaw-directive",
+  "authors": [
+    "David Jensen <david@jensen47.com>"
+  ],
+  "description": "AngularJS directive for Rickshaw.",
+  "main": "src/rickshaw-directive.js",
+  "keywords": [
+    "rickshaw",
+    "d3",
+    "angularjs"
+  ],
+  "license": "Apache License v2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
