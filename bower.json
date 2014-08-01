@@ -1,7 +1,7 @@
 {
-  "name": "rickshaw-directive",
+  "name": "rickshaw-angular-directive",
   "version": "0.0.1-pre",
-  "homepage": "https://github.com/roadrules/rickshaw-directive",
+  "homepage": "https://github.com/roadrules/rickshaw-angular-directive",
   "authors": [
     "David Jensen <david@jensen47.com>"
   ],
